@@ -1,13 +1,14 @@
-class Board
-  
-  def initialize(size=3)
-    if size < 3 || t 
-      size = 3
-      puts "Incorrect value, creating Board with default size: #{size}"
-    end
-    @size = size
-  end
+require_relative "board"
 
+puts "Board size"
+size = gets
+board = Board.new(size.to_i)
+board.render
 
-
+while true do
+  puts "give field:"
+  field = gets
+  board.set_move("O", field.to_i)
+  board.render
 end
+
