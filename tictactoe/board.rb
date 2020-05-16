@@ -1,20 +1,38 @@
 class Board
   
-  def initialize()
+  def initialize(player1, player2)
     @size = 3
-    @fields = @size * @size
-    @board = []
+    @fields = @size * @size 
+    @board = Array.new(@fields + 1) # +1 because we start Board array at index 1 for convenience
     @board[0] = '0'
+    @win_condition = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+    @player1_symb = player1.symbol
+    @player2_symb = player2.symbol
   end
   
   private
   
   def draw?
-  @board.filter {|i| i.nil?}.length > 0 ? true : false
+    @board.all?
   end
   
   def winner?
-    
+    win = false
+    @win_condition.each do |combination|
+      win = same_vals?(combination)
+      break if win
+    end
+    win
+  end
+
+  def same_vals?(arr)
+    arr.all? do |element|
+      if(@board[arr[0]].nil?)
+        false
+      else
+        @board[element] == @board[arr[0]]
+      end
+    end
   end
   
   public
