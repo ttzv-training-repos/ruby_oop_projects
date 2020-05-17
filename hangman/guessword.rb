@@ -1,9 +1,9 @@
 class GuessWord
   attr_reader :guessword, :tries
 
-  def initialize(words, tries)
+  def initialize(words, tries=6)
     word_list = filter_by_criterium(5, 12, words)
-    @guessword = word_list[rand(word_list.length-1)].strip
+    @guessword = word_list[rand(word_list.length-1)].strip.upcase
     @game_array = Array.new(@guessword.length-1)
     @blank_char = "_"
     @game_array.map!{|el| el=@blank_char if el.nil?}
